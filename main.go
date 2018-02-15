@@ -4,8 +4,8 @@ import (
 	"flag"
 	"log"
 
-	"github.com/kellegous/go/context"
-	"github.com/kellegous/go/web"
+	"github.com/steved/go/context"
+	"github.com/steved/go/web"
 )
 
 var version string

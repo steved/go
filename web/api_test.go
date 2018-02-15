@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kellegous/go/context"
+	"github.com/steved/go/context"
 	"github.com/syndtr/goleveldb/leveldb"
 )
 
