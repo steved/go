@@ -1,15 +1,8 @@
-FROM alpine
-
-ENV GOPATH /go
+FROM golang as builder
+WORKDIR /go/src/github.com/steved/go
 COPY . /go/src/github.com/steved/go
-RUN apk update \
-  && apk add go git musl-dev \
-  && go get github.com/steved/go \
-  && apk del go git musl-dev \
-  && rm -rf /var/cache/apk/* \
-  && rm -rf /go/src /go/pkg \
-  && mkdir /data
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o go .
 
-EXPOSE 8067
-
-CMD ["/go/bin/go", "--data=/data"]
+FROM scratch
+COPY --from=builder /go/src/github.com/steved/go/go /
+CMD ["/go", "--data=/data"]
